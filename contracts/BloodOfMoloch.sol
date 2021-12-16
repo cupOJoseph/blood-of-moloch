@@ -28,14 +28,14 @@ contract BloodOfMoloch is ERC721, ERC721Enumerable, ERC721Burnable, Ownable {
     }
 
     function redeem(uint256 _id) public {
-      require(ownerOf(_id) == msg.sender);
-      burn(_id);
+      burn(_id); //requires id is owned or allowed by sender.
+      emit Redeemed(_id, msg.sender);
     }
 
     function redeemBatch(uint256[] _ids) public{
       for (uint32 i = 0; i < _ids.length; i++) {
-        require(ownerOf(_ids[i]) == msg.sender);
-        burn(_ids[i]);
+        burn(_ids[i]); //requires id is owned or allowed by sender.
+        emit Redeemed(_ids[i], msg.sender);
       }
     }
 
